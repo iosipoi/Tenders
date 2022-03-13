@@ -13,6 +13,6 @@ namespace Tenders.Data
             : base(options)
         {
         }
-        public DbSet<Tenders.Models.Tenter> Tenter { get; set; }
+        public DbSet<Tenders.Models.Tender> Tenter { get; set; }
     }
 }

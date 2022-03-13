@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Tenders.Models
 {
-    public class Tenter
+    public class Tender
     {
         public int Id { get; set; }
         public string Name { get; set; }
