@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using TendersApi.Data;
 
 namespace TendersApi
 {
@@ -26,6 +28,9 @@ namespace TendersApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<TendersApiContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("TendersApiContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -8,52 +8,52 @@ using Microsoft.EntityFrameworkCore;
 using TendersApi.Data;
 using TendersApi.Model;
 
-namespace TendersApi.Controllers
+namespace TendersApi
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TendersController : ControllerBase
+    public class OffersController : ControllerBase
     {
         private readonly TendersApiContext _context;
 
-        public TendersController(TendersApiContext context)
+        public OffersController(TendersApiContext context)
         {
             _context = context;
         }
 
-        // GET: api/Tenders
+        // GET: api/Offers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tender>>> GetTender()
+        public async Task<ActionResult<IEnumerable<Offer>>> GetOffer()
         {
-            return await _context.Tender.ToListAsync();
+            return await _context.Offer.ToListAsync();
         }
 
-        // GET: api/Tenders/5
+        // GET: api/Offers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tender>> GetTender(int id)
+        public async Task<ActionResult<Offer>> GetOffer(int id)
         {
-            var tender = await _context.Tender.FindAsync(id);
+            var offer = await _context.Offer.FindAsync(id);
 
-            if (tender == null)
+            if (offer == null)
             {
                 return NotFound();
             }
 
-            return tender;
+            return offer;
         }
 
-        // PUT: api/Tenders/5
+        // PUT: api/Offers/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTender(int id, Tender tender)
+        public async Task<IActionResult> PutOffer(int id, Offer offer)
         {
-            if (id != tender.Id)
+            if (id != offer.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(tender).State = EntityState.Modified;
+            _context.Entry(offer).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace TendersApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TenderExists(id))
+                if (!OfferExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace TendersApi.Controllers
             return NoContent();
         }
 
-        // POST: api/Tenders
+        // POST: api/Offers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Tender>> PostTender(Tender tender)
+        public async Task<ActionResult<Offer>> PostOffer(Offer offer)
         {
-            _context.Tender.Add(tender);
+            _context.Offer.Add(offer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTender", new { id = tender.Id }, tender);
+            return CreatedAtAction("GetOffer", new { id = offer.Id }, offer);
         }
 
-        // DELETE: api/Tenders/5
+        // DELETE: api/Offers/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Tender>> DeleteTender(int id)
+        public async Task<ActionResult<Offer>> DeleteOffer(int id)
         {
-            var tender = await _context.Tender.FindAsync(id);
-            if (tender == null)
+            var offer = await _context.Offer.FindAsync(id);
+            if (offer == null)
             {
                 return NotFound();
             }
 
-            _context.Tender.Remove(tender);
+            _context.Offer.Remove(offer);
             await _context.SaveChangesAsync();
 
-            return tender;
+            return offer;
         }
 
-        private bool TenderExists(int id)
+        private bool OfferExists(int id)
         {
-            return _context.Tender.Any(e => e.Id == id);
+            return _context.Offer.Any(e => e.Id == id);
         }
     }
 }
